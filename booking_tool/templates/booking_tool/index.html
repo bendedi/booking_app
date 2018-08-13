@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>AIE booking tool</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+	</head>
+	<body>
+		<form action="{% url 'booking_tool:send' %}" method="post">
+			{% csrf_token %}
+			<input type="email" name="contact"><br>
+			<input type="number" name="number"><br>
+			<input type="week" name="week"><br>
+			morning<input type="checkbox" name="am"><br>
+			afternoon<input type="checkbox" name="pm"><br>
+			all day<input type="checkbox" name="all day"><br>
+			<input type="submit" value="Submit">
+		</form>
+	</body>
+</html>
