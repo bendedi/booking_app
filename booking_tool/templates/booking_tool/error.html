@@ -1,5 +1,14 @@
 <html>
 	<body>
 		<h1>Error</h1>
+		{% if mail == False %}
+			<h3>invalid e-mail address</h3>
+		{% endif %}
+		{% if number == False %}
+			<h3>invalid number of persons minimum 2, maximum 80</h3>
+		{% endif %}
+		{% if week == False %}
+			<h3>invalid week</h3>
+		{% endif %}
 	</body>
 </html>
