@@ -23,8 +23,12 @@ def		check(mail, number, week):
 	r3 = True
 	if (match('^[\w .-]+@[\w .-]{2,}\.[a-z]{2,4}$', mail) == None):
 		r1 = False
-	if (int(number) < MIN or int(number) > MAX):
-		r2 = False
+	try:
+		number = int(number)
+		if (int(number) < MIN or int(number) > MAX):
+			r2 = False
+	except:
+			r2 = False
 	# date = datetime.date
 	# if ():
 	# 	r3 = False
@@ -37,7 +41,7 @@ def		send(request):
 
 	results = check(mail, number, week)
 	if (results['r1'] == False or results['r3'] == False or results['r3'] == False):
-		return (render(request, "booking_tool/failure.html", results))
+		return (render(request, "booking_tool/error.html", results))
 	return (HttpResponse())
 
 # Create your views here.
