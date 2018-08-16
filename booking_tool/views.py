@@ -1,6 +1,5 @@
 from django.shortcuts	import render
 from django.template	import loader
-from dateutil.parser	import parse
 from django.http		import HttpResponse, HttpResponseRedirect
 from re					import match
 import datetime
