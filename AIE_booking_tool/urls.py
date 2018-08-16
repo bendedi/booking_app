@@ -19,6 +19,6 @@ from booking_tool		import views
 
 urlpatterns = [
 	re_path(r'^$', views.index, name='index'),
-	re_path(r'booking_tool/$', include('booking_tool.urls')),
-    re_path(r'admin/$', admin.site.urls),
+	re_path(r'booking_tool/', include('booking_tool.urls')),
+    re_path(r'admin/', admin.site.urls),
 ]
