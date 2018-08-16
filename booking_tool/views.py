@@ -23,12 +23,15 @@ def		check(mail, number, week):
 	r3 = True
 	if (match('^[\w .-]+@[\w .-]{2,}\.[a-z]{2,4}$', mail) == None):
 		r1 = False
+	print(number)
 	try:
+		print(number)
 		number = int(number)
-		if (int(number) < MIN or int(number) > MAX):
+		if (number < MIN or number > MAX):
 			r2 = False
 	except:
 			r2 = False
+	print(r2)
 	# date = datetime.date
 	# if ():
 	# 	r3 = False
@@ -40,7 +43,7 @@ def		send(request):
 	week = request.POST['week']				# forme: 20XX-WXX
 
 	results = check(mail, number, week)
-	if (results['r1'] == False or results['r3'] == False or results['r3'] == False):
+	if (results['r1'] == False or results['r2'] == False or results['r3'] == False):
 		return (render(request, "booking_tool/error.html", results))
 	return (HttpResponse())
 
