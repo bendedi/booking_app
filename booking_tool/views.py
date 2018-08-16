@@ -9,7 +9,8 @@ MAX = 80
 
 def		index(request):
 	# return (HttpResponse("salut"))
-	return (render(request, "booking_tool/index.html"))
+	# return (render(request, "booking_tool/index.html"))
+	return (render(request, "booking_tool/index2.html"))
 
 def		success(request):
 	return (render(request, "booking_tool/success.html"))
@@ -51,6 +52,6 @@ def		send(request):
 	if (results['r1'] == False or results['r2'] == False or results['r3'] == False):
 		return (render(request, "booking_tool/error.html", results))
 	
-	return (HttpResponse())
+	return (render(request, "bookin_tool/success.html"))
 
 # Create your views here.
