@@ -1,0 +1,19 @@
+article
+{
+	text-align: center;
+	padding-top: 5%;
+	padding-bottom: 10%;
+	background-color: #f4f9f4 ;
+	width: 50%;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 4%;
+	padding-right:4%;
+}
+body {
+background-color: #616161;
+}
+.radio1{
+	height: 15em;
+}
+
