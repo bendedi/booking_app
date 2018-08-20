@@ -6,6 +6,7 @@ from re					import match
 
 from booking_tool.authhelper	import get_signin_url, get_access_token, get_token_from_code
 from booking_tool.outlook		import get_me
+from booking_tool.models		import test
 
 import datetime, time
 
@@ -23,6 +24,13 @@ def		index(request):
 	return (render(request, "booking_tool/index2.html", context))
 
 #		^[\w .-]+@capgemini\.[a-z]{2,4}$		regex mail
+
+def		model(request):
+	#test.objects.all()[1]
+	r = test.objects.filter(_mail="asd")[0]
+	mel = r.mel()
+	number = r.num()
+	return (render(request, "booking_tool/model.html", {"mel" : mel, "number" : number}))
 
 def		check(mail, number, week):
 	r1 = True
@@ -54,6 +62,7 @@ def		send(request):
 	number = request.POST['number']
 	week = request.POST['week']				# forme: 20XX-WXX
 
+	#test.objects.create(_mail="asd", _number=123)
 	results = check(mail, number, week)
 	if ((results['r1'] == False) or (results['r2'] == False) or (results['r3'] == False)):
 		context = {
