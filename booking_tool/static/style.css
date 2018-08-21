@@ -2,13 +2,15 @@ article
 {
 	text-align: center;
 	padding-top: 5%;
-	padding-bottom: 10%;
+	padding-bottom: 15%;
 	background-color: #f4f9f4 ;
 	width: 50%;
 	margin-left: auto;
 	margin-right: auto;
 	padding-left: 4%;
 	padding-right:4%;
+	overflow: scroll;
+	font-weight: normal;
 }
 body {
 background-color: #616161;
@@ -16,4 +18,6 @@ background-color: #616161;
 .radio1{
 	height: 15em;
 }
-
+#description{
+	width: 92%;
+}
