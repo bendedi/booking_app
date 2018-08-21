@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AIE Home page</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    {% load static %}
+    <script src="{% static 'script_personnalise.js' %}" type="text/javascript"></script>
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <article id="pageaccueil">
+        <h2>
+            Welcome to the AIE booking app
+        </h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label for="button1">
+            <h4>
+                click here to reserve a room
+            </h4>
+        </label>
+        <br>
+        <br>
+        <a href="{% url 'index2' %}">
+            <button name="button1" type="button" class="btn btn-secondary btn-lg">
+                click here
+            </button>
+        </a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <label for="button1">
+                <h4>
+                    click here to see your reservation
+                </h4>
+        </label>
+        <br>
+        <br>
+        <a href="https://openclassrooms.com">
+            <button name="button2" type="button" class="btn btn-secondary btn-lg">
+            click here
+            </button>
+        </a>
+    </article>
+</body>
+</html>
