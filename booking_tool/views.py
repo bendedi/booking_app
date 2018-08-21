@@ -1,13 +1,13 @@
-from django.shortcuts	import render
+from django.shortcuts	import render, redirect
 from django.template	import loader
-from django.http		import HttpResponse, HttpResponseRedirect
+from django.http		import HttpResponse, HttpResponseRedirect, HttpRequest, HttpResponseBadRequest
 from django.urls 		import reverse
 from re					import match
 
 from booking_tool.authhelper	import get_signin_url, get_access_token, get_token_from_code
-from booking_tool.outlook		import get_me
+from booking_tool.outlook		import get_me, get_rooms
 
-import datetime, time
+import datetime, time, requests
 
 MIN = 2
 MAX = 80
@@ -19,8 +19,9 @@ def		index(request):
 	# return (render(request, "booking_tool/index.html"))
 	redirect_uri = request.build_absolute_uri(reverse('gettoken'))
 	signin_url = get_signin_url(redirect_uri)
-	context = {'signin_url' : signin_url}
-	return (render(request, "booking_tool/index2.html", context))
+	# context = {'signin_url' : signin_url}
+	return (redirect(signin_url))
+	# return (render(request, "booking_tool/index2.html", context))
 
 #		^[\w .-]+@capgemini\.[a-z]{2,4}$		regex mail
 
@@ -62,10 +63,16 @@ def		send(request):
 			'week': results['r3'],
 		}
 		return (render(request, "booking_tool/error.html", context))
-	return (render(request, "booking_tool/success.html"))
+	r = send_mail()
+	if (r.status_code == 202):
+		return (render(request, "booking_tool/success.html"))
+	else:
+		return (render(request, "booking_tool/error.html"))
 
 def		gettoken(request):
 	auth_code = request.GET['code']
+	if auth_code is None:
+		return (HttpResponseBadRequest())
 	redirect_uri = request.build_absolute_uri(reverse('gettoken'))
 	token = get_token_from_code(auth_code, redirect_uri)
 	access_token = token['access_token']
@@ -77,7 +84,10 @@ def		gettoken(request):
 	request.session['access_token'] = access_token
 	request.session['refresh_token'] = refresh_token
 	request.session['token_expires'] = expiration
-	return (HttpResponse('User: {0}, Access token: {1}'.format(user['displayName'], access_token)))
+	request.session['user_mail'] = user['mail']
+	request.session['user_name'] = user['displayName']
+	# return (HttpResponse('User: {0}, Access token: {1}'.format(user['displayName'], access_token)))
+	return (render(request, "booking_tool/index2.html"))
 
 def		mail(request):
 	access_token = get_access_token(request, request.build_absolute_uri(reverse('booking_tool:gettoken')))
@@ -87,5 +97,9 @@ def		mail(request):
 	else:
 		return (HttpResponse('Access Found in session {0}'.format(access_token)))
 
-
-
+def		get_room(request):
+	room = get_rooms(request.session['access_token'], 'rs.fr.showroom@capgemini.com', '2018-20-08T07:00:00.0000000', '2018-31-08T19:00:00.0000000')
+	print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ROOM>>>>>>>>>>>>>>>>>>>>>>>>>")
+	print(room)
+	print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<ROOM>>>>>>>>>>>>>>>>>>>>>>>>>")
+	return (HttpResponse('name: {0}, address: {1}'.format(room['name'], room['address'])))
