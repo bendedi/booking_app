@@ -14,7 +14,8 @@ scopes = [
 	'openid',
 	'offline_access',
 	'User.Read',
-	'Mail.Read' 
+	'Mail.Send',
+	'Calendars.ReadWrite'
 ]
 
 def		get_signin_url(redirect_uri):

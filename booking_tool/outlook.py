@@ -1,6 +1,8 @@
 import requests, uuid, json
 
 graph_endpoint = 'https://graph.microsoft.com/v1.0{0}'
+graphBeta_endpoint = 'https://graph.microsoft.com/beta{0}'
+outlook_endpoint = 'https://outlook.office.com/api{0}'
 
 def		make_api_call(method, url, token, payload = None, parameters = None):
 	headers = { 'User-Agent' : 'python_tutorial/1.0',
@@ -31,6 +33,22 @@ def		get_me(access_token):
 	query_parameters = {'$select': 'displayName,mail'}
 	r = make_api_call('GET', get_me_url, access_token, "", parameters = query_parameters)
 
+	if (r.status_code == 200):
+		return (r.json())
+	else:
+		return ("{0}: {1}".format(r.status_code, r.text))
+
+# rs.fr.acceleratedzone@capgemini.com
+# rs.fr.showroom@capgemini.com
+
+def		get_rooms(access_token, user, start, end):
+	get_calendar_url = graphBeta_endpoint.format('/users/{0}/calendar/calendarView'.format(user))
+	query_parameters = {
+		'$startDateTime': start,
+		'$endDateTime': end
+	}
+	r = make_api_call('GET', get_calendar_url, access_token, "", parameters = query_parameters)
+	print(r.status_code)
 	if (r.status_code == 200):
 		return (r.json())
 	else:
