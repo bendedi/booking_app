@@ -17,11 +17,12 @@ MAX = 80
 
 def		index(request):
 	# return (HttpResponse("salut"))
-	# return (render(request, "booking_tool/index.html"))
-	redirect_uri = request.build_absolute_uri(reverse('gettoken'))
-	signin_url = get_signin_url(redirect_uri)
+	#return (render(request, "booking_tool/index.html"))
+	return (render(request, "booking_tool/selection.html"))
+	#redirect_uri = request.build_absolute_uri(reverse('gettoken'))
+	#signin_url = get_signin_url(redirect_uri)
 	# context = {'signin_url' : signin_url}
-	return (redirect(signin_url))
+	#return (redirect(signin_url))
 	# return (render(request, "booking_tool/index2.html", context))
 
 #		^[\w .-]+@capgemini\.[a-z]{2,4}$		regex mail

@@ -21,3 +21,9 @@ background-color: #616161;
 #description{
 	width: 92%;
 }
+.ui-widget.ui-widget-content{
+	margin: auto;
+}
+div.ui-datepicker{
+	font-size:1.2em;
+   }
