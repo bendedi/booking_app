@@ -9,6 +9,12 @@ function hiddeDayTime() {
     //containerStyle.style.marginTop = "10vh";
 }
 
+function hiddeDates(n) {
+    containerchoices= document.getElementsByClassName("toHide")
+    containerchoices[n].innerHTML= 'confirmed'
+
+}
+
 function showDayTime() {
     var user = 1 ;
     containerShow= document.getElementById("toshow")
